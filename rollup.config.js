@@ -8,6 +8,13 @@ export default {
   output: [
     {
       file: "dist/index.js",
+      format: "cjs",
+      globals: {
+        vue: "Vue",
+      },
+    },
+    {
+      file: "dist/index.esm.js",
       format: "esm",
       globals: {
         vue: "Vue",
