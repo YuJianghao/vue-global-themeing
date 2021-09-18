@@ -1,1 +1,67 @@
-import{inject as e,ref as t,computed as n}from"vue";function a(e={},t="-"){return Object.keys(e).reduce(((n,r)=>{const s=e[r],u=`${t}-${r}`;if("string"==typeof s)return n[u]=s,n;{const e=a(s,u);return{...n,...e}}}),{})}const r=Symbol("theme");class s{name=t("default");map=new Map;constructor(e){this.map=new Map(Object.entries(e))}install(e,t){e.provide(t||r,this)}changeTheme(e){this.map.has(e)?this.name.value=e:console.warn(`theme ${e} not found`)}setTheme(e,t){this.map.set(e,t)}deleteTheme(e){"default"!==e?this.map.delete(e):console.warn("can not delete default theme, try change it by `setTheme('default', newTheme)`")}get data(){return n((()=>this.map.get(this.name.value)))}get styles(){return n((()=>a(this.data.value)))}get currentTheme(){return n((()=>this.name.value))}get themeList(){return n((()=>[...this.map.keys()]))}}function u(t=null){return e(null!==t?t:r)}function l(t=null){return e(null!==t?t:r)?.data}function h(e){return new s(e)}export{h as createTheme,l as useTheme,u as useThemeController};
+import { inject, ref, computed } from 'vue';
+
+function serialize(obj = {}, prefix = "-") {
+    return Object.keys(obj).reduce((o, key) => {
+        const value = obj[key];
+        const name = `${prefix}-${key}`;
+        if (typeof value === "string") {
+            o[name] = value;
+            return o;
+        }
+        else {
+            const res = serialize(value, name);
+            return { ...o, ...res };
+        }
+    }, {});
+}
+const themeProviderInjectionKey = Symbol("theme");
+class Theme {
+    name = ref("default");
+    map = new Map();
+    constructor(map) {
+        this.map = new Map(Object.entries(map));
+    }
+    install(app, injectKey) {
+        app.provide(injectKey || themeProviderInjectionKey, this);
+    }
+    changeTheme(name) {
+        if (!this.map.has(name)) {
+            console.warn(`theme ${name} not found`);
+            return;
+        }
+        this.name.value = name;
+    }
+    setTheme(name, theme) {
+        this.map.set(name, theme);
+    }
+    deleteTheme(name) {
+        if (name === "default") {
+            console.warn(`can not delete default theme, try change it by \`setTheme('default', newTheme)\``);
+            return;
+        }
+        this.map.delete(name);
+    }
+    get data() {
+        return computed(() => this.map.get(this.name.value));
+    }
+    get styles() {
+        return computed(() => serialize(this.data.value));
+    }
+    get currentTheme() {
+        return computed(() => this.name.value);
+    }
+    get themeList() {
+        return computed(() => [...this.map.keys()]);
+    }
+}
+function useThemeController(key = null) {
+    return inject(key !== null ? key : themeProviderInjectionKey);
+}
+function useTheme(key = null) {
+    return inject(key !== null ? key : themeProviderInjectionKey)?.data;
+}
+function createTheme(map) {
+    return new Theme(map);
+}
+
+export { createTheme, useTheme, useThemeController };
