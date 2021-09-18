@@ -1,7 +1,5 @@
 import { App, InjectionKey, inject, computed, ref, ComputedRef } from "vue";
 
-const DEV = process.env.NODE_ENV !== "production";
-
 export interface ITheme {
   [key: string]: string | ITheme;
 }
@@ -41,7 +39,7 @@ class Theme<T extends ITheme = ITheme> {
   }
   changeTheme(name: string) {
     if (!this.map.has(name)) {
-      DEV && console.warn(`theme ${name} not found`);
+      console.warn(`theme ${name} not found`);
       return;
     }
     this.name.value = name;
@@ -51,10 +49,9 @@ class Theme<T extends ITheme = ITheme> {
   }
   deleteTheme(name: string) {
     if (name === "default") {
-      DEV &&
-        console.warn(
-          `can not delete default theme, try change it by \`setTheme('default', newTheme)\``
-        );
+      console.warn(
+        `can not delete default theme, try change it by \`setTheme('default', newTheme)\``
+      );
       return;
     }
     this.map.delete(name);

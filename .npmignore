@@ -1,0 +1,8 @@
+example
+node_modules
+.gitignore
+index.ts
+package.json
+rollup.config.js
+tsconfig.json
+yarn.lock
