@@ -1,0 +1,22 @@
+{
+  "name": "vue-global-theming",
+  "version": "0.1.0",
+  "repository": "https://github.com/YuJianghao/vue-global-theming",
+  "author": "winwin2011 <yjh2011@live.com>",
+  "license": "MIT",
+  "type": "module",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
+  "types": "dist/index.d.ts",
+  "dependencies": {
+    "vue": "^3.0.1"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^16.9.2",
+    "rollup-plugin-typescript2": "^0.30.0",
+    "typescript": "^4.4.3"
+  }
+}
