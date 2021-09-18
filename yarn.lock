@@ -2866,7 +2866,7 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
-vue@^3.0.1:
+vue@^3.2.6:
   version "3.2.12"
   resolved "https://registry.nlark.com/vue/download/vue-3.2.12.tgz#b44f55506fb6a7c4b65635e609deb5f9368aa2ce"
   integrity sha1-tE9VUG+2p8S2VjXmCd61+TaKos4=
