@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
-    "target": "ESNext",
-    "module": "ESNext",
+    "target": "es2015",
+    "module": "es2015",
     "strict": true,
     "declaration": true,
     "importHelpers": true,
