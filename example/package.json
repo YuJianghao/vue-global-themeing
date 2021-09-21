@@ -7,6 +7,7 @@
     "serve": "vite preview"
   },
   "dependencies": {
+    "@winwin/vue-global-theming": "^0.1.2",
     "vue": "^3.2.6"
   },
   "devDependencies": {
